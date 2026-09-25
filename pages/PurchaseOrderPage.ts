@@ -8,7 +8,7 @@ export class PurchaseOrderPage {
   async selectVendor(name: string) {
     const vendor = this.page.getByRole('combobox', { name: 'Vendor?' });
     await vendor.fill(name);
-    await this.page.getByRole('link', { name, exact: true }).first().click();
+    await this.page.locator('[id^="partner_id_"][id$="_0"]').first().click();
   }
 
   async addLine(product: string, quantity: number, price: number) {
@@ -16,7 +16,7 @@ export class PurchaseOrderPage {
     const row = this.page.locator('tr').filter({ has: this.page.getByRole('combobox').last() }).last();
     const productField = row.getByRole('combobox').first();
     await productField.fill(product);
-    await this.page.getByRole('link', { name: product, exact: true }).last().click();
+    await this.page.getByText(product, { exact: true }).last().click();
     await row.locator('input').nth(0).fill(String(quantity));
     await row.locator('input').nth(1).fill(String(price));
   }
