@@ -2,8 +2,6 @@ import { test as setup, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { OdooTestData } from '../api/OdooTestData';
 
-const authFile = '.auth/admin.json';
-
 setup('authenticate admin', async ({ page, request }) => {
   await page.goto('/web/login');
   await page.locator('input[name="login"]').fill(process.env.ODOO_USER!);
@@ -17,5 +15,4 @@ setup('authenticate admin', async ({ page, request }) => {
   };
   await mkdir('.auth', { recursive: true });
   await writeFile('.auth/seed.json', JSON.stringify(seed), 'utf8');
-  await page.context().storageState({ path: authFile });
 });
