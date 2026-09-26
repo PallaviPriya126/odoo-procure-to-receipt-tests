@@ -11,8 +11,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   test:
@@ -59,17 +57,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 14
-      - uses: actions/upload-pages-artifact@v3
-        if: ${{ !cancelled() }}
-        with:
-          path: playwright-report/
-
-  publish-report:
-    needs: test
-    if: ${{ !cancelled() }}
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
