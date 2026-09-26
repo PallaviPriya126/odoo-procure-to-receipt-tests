@@ -26,7 +26,7 @@ export class OdooApiClient {
   }
 
   async create(model: string, values: Record<string, unknown>, apiKey = this.apiKey) {
-    const response = await this.call(model, 'create', { values }, apiKey);
+    const response = await this.call(model, 'create', { vals_list: [values] }, apiKey);
     await expect(response).toBeOK();
     return response.json();
   }
