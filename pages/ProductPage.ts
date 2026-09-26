@@ -4,7 +4,7 @@ export class ProductPage {
   constructor(private readonly page: Page) {}
 
   async createGoods(name: string) {
-    await this.page.goto('/web#id=new&model=product.template&view_type=form');
+    await this.page.goto('/web#action=purchase.product_normal_action_puchased&model=product.template&view_type=form&id=new');
     await this.page.locator('[id^="name_"]').fill(name);
     await this.page.getByRole('radio', { name: 'Goods' }).check();
     await this.page.getByRole('checkbox', { name: 'Track Inventory?' }).check();

@@ -3,7 +3,9 @@ import { expect, Page } from '@playwright/test';
 export class PurchaseOrderPage {
   constructor(private readonly page: Page) {}
 
-  async openNew() { await this.page.goto('/web#id=new&model=purchase.order&view_type=form'); }
+  async openNew() {
+    await this.page.goto('/web#action=purchase.purchase_rfq&model=purchase.order&view_type=form&id=new');
+  }
 
   async selectVendor(name: string) {
     const vendor = this.page.getByRole('combobox', { name: 'Vendor?' });
