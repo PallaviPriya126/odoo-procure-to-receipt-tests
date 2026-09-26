@@ -24,4 +24,16 @@ export class OdooApiClient {
     await expect(response).toBeOK();
     return response.json();
   }
+
+  async create(model: string, values: Record<string, unknown>, apiKey = this.apiKey) {
+    const response = await this.call(model, 'create', { values }, apiKey);
+    await expect(response).toBeOK();
+    return response.json();
+  }
+
+  async write(model: string, ids: number[], values: Record<string, unknown>, apiKey = this.apiKey) {
+    const response = await this.call(model, 'write', { ids, values }, apiKey);
+    await expect(response).toBeOK();
+    return response.json();
+  }
 }

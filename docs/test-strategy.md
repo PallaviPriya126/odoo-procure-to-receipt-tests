@@ -21,6 +21,7 @@ Out of scope: vendor bills and accounting reconciliation, multi-company, multi-c
 - Use stable Odoo field and button names, Playwright auto-waiting, and web-first assertions.
 - Keep tests independent and use unique test data when creating records.
 - Use the API for fast setup and the UI for the user journey; verify important results in PostgreSQL.
+- Edge-case coverage will use isolated disposable records for partial receipts/backorders, cancellations, multi-line transfers, exact totals, and receipt-vendor matching. UI actions stay in Page Objects; API/database checks verify exact states where UI formatting is unstable.
 
 ## Environments
 
