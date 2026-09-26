@@ -3,8 +3,8 @@ import { expect, Page } from '@playwright/test';
 export class PurchaseOrderPage {
   constructor(private readonly page: Page) {}
 
-  async openNew() {
-    await this.page.goto('/web#action=purchase.purchase_rfq&model=purchase.order&view_type=form&id=new');
+  async openNew(actionId: number) {
+    await this.page.goto(`/web#action=${actionId}&model=purchase.order&view_type=form&id=new`);
   }
 
   async selectVendor(name: string) {

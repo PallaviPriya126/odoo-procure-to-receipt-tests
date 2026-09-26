@@ -23,6 +23,27 @@ export class OdooTestData {
     return { vendorId: vendor, vendorName, productId: Number(product.id), productName: String(product.name) };
   }
 
+  async getUiActionIds() {
+    const actionId = async (xmlId: string) => {
+      const [module, name] = xmlId.split('.');
+      const records = await this.api.searchRead(
+        'ir.model.data',
+        [['module', '=', module], ['name', '=', name], ['model', '=', 'ir.actions.act_window']],
+        ['res_id'],
+      );
+      if (!records.length) throw new Error(`Odoo action ${xmlId} was not found`);
+      return Number(records[0].res_id);
+    };
+
+    return {
+      vendorActionId: await actionId('base.action_partner_supplier_form'),
+      productActionId: await actionId('purchase.product_normal_action_puchased'),
+      rfqActionId: await actionId('purchase.purchase_rfq'),
+      purchaseOrderActionId: await actionId('purchase.purchase_form_action'),
+      receiptActionId: await actionId('stock.action_picking_tree_incoming'),
+    };
+  }
+
   async ensureValidatedPurchaseFlow() {
     const existing = await this.api.searchRead('purchase.order', [['name', '=', 'P00001']], ['id', 'name', 'picking_ids']);
     if (existing.length) {

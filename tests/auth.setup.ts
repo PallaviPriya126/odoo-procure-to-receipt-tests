@@ -11,7 +11,11 @@ setup('authenticate admin', async ({ page, request }) => {
   await page.getByRole('button', { name: 'Log in' }).click();
   await expect(page).toHaveURL(/\/odoo/);
   await page.context().storageState({ path: authFile });
-  const seed = await new OdooTestData(request).ensureValidatedPurchaseFlow();
+  const testData = new OdooTestData(request);
+  const seed = {
+    ...await testData.ensureValidatedPurchaseFlow(),
+    ...await testData.getUiActionIds(),
+  };
   await mkdir('.auth', { recursive: true });
   await writeFile('.auth/seed.json', JSON.stringify(seed), 'utf8');
 });
