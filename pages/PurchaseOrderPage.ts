@@ -4,7 +4,7 @@ export class PurchaseOrderPage {
   constructor(private readonly page: Page) {}
 
   async openNew(actionId: number) {
-    await this.page.goto(`/web#action=${actionId}&model=purchase.order&view_type=form&id=new`);
+    await this.page.goto(`/odoo/action-${actionId}/new?action=${actionId}&model=purchase.order&resId=new`);
   }
 
   async selectVendor(name: string) {
