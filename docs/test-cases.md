@@ -30,10 +30,10 @@ Created vendor **Test Vendor A** and tracked Goods product **Test Bolt**. Create
 | TC01 | Create RFQ | New RFQ with vendor and one product, quantity 10 | Status RFQ; line total correct | Pass: P00001, subtotal 500.00 |
 | TC02 | Confirm RFQ | Confirm Order on TC01 | Status Purchase Order; receipt created | Pass: Purchase Order; one Receipt |
 | TC03 | Full receipt | Validate receipt with quantity 10 | Receipt Done; PO received 10; on hand +10 | Pass: WH/IN/00001 Done; received 10; on hand 10 |
-| TC04 | Partial receipt | Receive 6 of 10 and create backorder | Receipt Done for 6; backorder for 4 | Not run |
-| TC05 | Cancel RFQ | Cancel a draft RFQ | Status Cancelled; no receipt | Not run |
-| TC06 | Cancel confirmed PO | Cancel confirmed PO before receipt | Status Cancelled; receipt cancelled | Not run |
-| TC07 | Multi-line PO | Three products with different quantities | All three lines appear on receipt | Not run |
+| TC04 | Partial receipt | Receive 6 of 10 and create backorder | Receipt Done for 6; backorder for 4 | Pass: automated API integration test |
+| TC05 | Cancel RFQ | Cancel a draft RFQ | Status Cancelled; no receipt | Pass: automated API integration test |
+| TC06 | Cancel confirmed PO | Cancel confirmed PO before receipt | Status Cancelled; receipt cancelled | Pass: automated API integration test |
+| TC07 | Multi-line PO | Three products with different quantities | All three lines appear on receipt | Pass: automated API integration test |
 | TC08 | Missing vendor | Try to save RFQ without vendor | Error; record not saved | Not run |
-| TC09 | Line total | Quantity 7 x price 13.50 | Subtotal 94.50 | Not run |
-| TC10 | Vendor on receipt | Confirm PO and open receipt | Receipt partner equals PO vendor | Pass observed: Test Vendor A |
+| TC09 | Line total | Quantity 7 x price 13.50 | Subtotal 94.50 | Pass: automated API integration test |
+| TC10 | Vendor on receipt | Confirm PO and open receipt | Receipt partner equals PO vendor | Pass: automated API integration test |

@@ -10,8 +10,16 @@ export class OdooTestData {
     const vendorName = `QA Vendor ${suffix}`;
     const productName = `QA Product ${suffix}`;
     const vendor = await this.api.create('res.partner', { name: vendorName, supplier_rank: 1 });
-    const products = await this.api.searchRead('product.product', [['name', '=', 'Test Bolt']], ['id', 'name']);
+    const templateId = await this.api.create('product.template', {
+      name: productName,
+      purchase_ok: true,
+      sale_ok: false,
+      type: 'consu',
+      is_storable: true,
+    });
+    const products = await this.api.searchRead('product.product', [['product_tmpl_id', '=', templateId]], ['id', 'name']);
     const product = products[0];
-    return { vendorId: Number(vendor), vendorName, productId: Number(product.id), productName: String(product.name) };
+    if (!product) throw new Error(`Product variant was not created for template ${templateId}`);
+    return { vendorId: vendor, vendorName, productId: Number(product.id), productName: String(product.name) };
   }
 }
